@@ -1,0 +1,4 @@
+#!/bin/bash
+for f in $( find ./ -name '*.json' );
+    do python ./get_lines.py "$f" "disney";
+done;
