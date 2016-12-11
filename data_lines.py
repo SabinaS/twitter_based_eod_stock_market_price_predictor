@@ -1,8 +1,10 @@
 #!/usr/bin/env python
-import json
+import json 
+import csv
+from dateutil.parser import parse
 
 def getEnglishEntries( filename ):
-    ''' Method for prasing a file for English entries '''
+    ''' Method for prasing a file for English entries ''' 
     englishEntries = []
     with open( filename ) as jData:
         for line in jData:
@@ -13,6 +15,7 @@ def getEnglishEntries( filename ):
             else:
                 continue
     jData.close()
+    print '~~~~~~~~~~~~~ en {}'.format( len(englishEntries))
     return englishEntries
 
 def getRelevantEntries( companyName, listOfEntries ):
@@ -28,7 +31,37 @@ def getRelevantEntries( companyName, listOfEntries ):
                 continue
         else:
             continue
+    print '~~~~~~~~~~~~~~~~~~~~~ rel {}'.format( len( relevantEntries) )
     return relevantEntries
+
+def getDateAndText( listOfEntries ):
+    parsedEntries = []
+    for entry in listOfEntries:
+        if u'user' in entry:
+            tempDict = {}
+            datetime = entry[ u'created_at' ]
+	    datetimeObj = parse( datetime )
+	    day = str( datetimeObj.day ) if len( str( datetimeObj.day ) )==2 else '0'+str( datetimeObj.day )
+	    month = str( datetimeObj.month ) if len( str( datetimeObj.month ) )==2 else '0'+str( datetimeObj.month )
+            year = str( datetimeObj.year )[ 2: ]
+            formattedDate = month+'_'+day+'_'+year
+            tempDict[ u'created_at' ] = formattedDate
+            tempDict[ u'text' ] = entry[ u'text' ]
+            parsedEntries.append( tempDict )
+        else:
+            continue
+    print '~~~~~~~~~~~~~~~~ par {}'.format( len( parsedEntries ) )
+    return parsedEntries
+
+
+def createCSV( companyName, listOfEntries ):
+    print '~~~~~~~~~~~~~ cre {}'.format( len( listOfEntries ) )
+    if listOfEntries:
+    	keys = listOfEntries[ 0 ].keys()
+    	with open( companyName+'.csv', 'a+' ) as outputCSV:
+            dictWriter = csv.DictWriter( outputCSV, keys )
+            #dictWriter.writeheader()
+            dictWriter.writerows( listOfEntries )    
 
 def writeOutputJSON( companyName, listOfEntries) :
     ''' Method for taking in a list of entries and writing an output json
@@ -40,6 +73,8 @@ def writeOutputJSON( companyName, listOfEntries) :
 
 if __name__ == "__main__":
     import sys
-    englishEntries = getEnglishEntries( sys.argv[ 1 ] )
+    englishEntries = getEnglishEntries( sys.argv[ 1 ] ) 
     relevantEntries = getRelevantEntries( sys.argv[ 2 ], englishEntries )
-    writeOutputJSON( sys.argv[ 2 ], relevantEntries )
+    parsedEntries = getDateAndText( relevantEntries )
+    createCSV( sys.argv[ 2 ], parsedEntries )
+    #writeOutputJSON( sys.argv[ 2 ], relevantEntries )
