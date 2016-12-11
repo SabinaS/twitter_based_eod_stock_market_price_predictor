@@ -1,4 +1,10 @@
 #!/bin/bash
-for f in $( find ./ -name '*.json' );
-    do python ./get_lines.py "$f" "disney";
+## declare an array variable
+declare -a arr=("att" "disney" "apple" "netflix" "amazon" "walmart" "verizon" "microsoft")
+#declare -a arr=("disney")
+for n in "${arr[@]}";
+    do for f in $( find ./ -name '*.json' );
+        do python ./get_lines.py "$f" "$n";
+    done;
 done;
+
