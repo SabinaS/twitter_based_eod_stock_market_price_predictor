@@ -1,0 +1,4 @@
+#!/bin/bash
+bzip2 -d *
+rm -rf *.bz2
+            
