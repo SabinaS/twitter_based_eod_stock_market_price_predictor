@@ -4,7 +4,7 @@ declare -a arr=("att" "disney" "apple" "netflix" "amazon" "walmart" "verizon" "m
 #declare -a arr=("disney")
 for n in "${arr[@]}";
     do for f in $( find ./ -name '*.json' );
-        do python ./get_lines.py "$f" "$n";
+        do python ./data_lines.py "$f" "$n";
     done;
 done;
 
