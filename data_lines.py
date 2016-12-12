@@ -15,7 +15,7 @@ def getEnglishEntries( filename ):
             else:
                 continue
     jData.close()
-    print '~~~~~~~~~~~~~ en {}'.format( len(englishEntries))
+    #print '~~~~~~~~~~~~~ en {}'.format( len(englishEntries))
     return englishEntries
 
 def getRelevantEntries( companyName, listOfEntries ):
@@ -31,7 +31,7 @@ def getRelevantEntries( companyName, listOfEntries ):
                 continue
         else:
             continue
-    print '~~~~~~~~~~~~~~~~~~~~~ rel {}'.format( len( relevantEntries) )
+    #print '~~~~~~~~~~~~~~~~~~~~~ rel {}'.format( len( relevantEntries) )
     return relevantEntries
 
 def getDateAndText( listOfEntries ):
@@ -50,12 +50,12 @@ def getDateAndText( listOfEntries ):
             parsedEntries.append( tempDict )
         else:
             continue
-    print '~~~~~~~~~~~~~~~~ par {}'.format( len( parsedEntries ) )
+    #print '~~~~~~~~~~~~~~~~ par {}'.format( len( parsedEntries ) )
     return parsedEntries
 
 
 def createCSV( companyName, listOfEntries ):
-    print '~~~~~~~~~~~~~ cre {}'.format( len( listOfEntries ) )
+    #print '~~~~~~~~~~~~~ cre {}'.format( len( listOfEntries ) )
     if listOfEntries:
     	keys = listOfEntries[ 0 ].keys()
     	with open( companyName+'.csv', 'a+' ) as outputCSV:
