@@ -1,4 +1,4 @@
 #!/bin/bash
 for d in ./*/;
-do( cd "$d" && ../unzip );
+do( cd "$d" && ../unzip_bash );
 done
