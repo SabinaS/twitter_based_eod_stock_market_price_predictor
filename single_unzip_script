@@ -1,0 +1,7 @@
+#!/bin/bash
+for d in $( find ./ -name '*.bz2' );
+    do( bzip2 -d $d );
+done;
+for d in $( find ./ -name '*.bz2' )
+    do( rm -rf $d);
+done;
