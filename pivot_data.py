@@ -11,7 +11,7 @@ def pivotCSVFile( fileName ):
         readr = csv.reader( inFile )
         for row in readr:
             text = row[ 0 ]
-            date = row[1 ]
+            date = row[ 1 ]
             if date in pivotData:
                 pivotData[ date ].append( text )
             else:
@@ -21,7 +21,7 @@ def pivotCSVFile( fileName ):
     for k,v in pivotData.iteritems():
         strValues = ",".join( v )
         pivotData[ k ] = strValues
-    # Create a list of dicts corresponding to each row
+    # Create a temp dict corresponding to each row
     # Write back the dictionary as a csv
     with open( fileName[:-4 ]+'_pivot.csv', 'a+' ) as outFile:
         tempDict = {}
