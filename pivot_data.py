@@ -3,6 +3,7 @@ import csv
 
 def pivotCSVFile( fileName ):
     # Temp dictionary to store values
+    finalData = []
     pivotData = {}
     # Open the file and read the contents
     # Add texts for same dates to a list
@@ -20,12 +21,20 @@ def pivotCSVFile( fileName ):
     for k,v in pivotData.iteritems():
         strValues = ",".join( v )
         pivotData[ k ] = strValues
+    # Create a list of dicts corresponding to each row
     # Write back the dictionary as a csv
     with open( fileName[:-4 ]+'_pivot.csv', 'a+' ) as outFile:
-        w = csv.DictWriter( outFile, pivotData.keys() )
-        w.writerow( pivotData.items() )
+        tempDict = {}
+        fieldNames = [ 'date', 'text' ]
+        w = csv.DictWriter( outFile, fieldNames )
+        for k,v in pivotData.iteritems():
+            tempDict[ fieldNames[ 0 ] ] = k
+            tempDict[ fieldNames[ 1 ]  ] = v
+            w.writerow( tempDict )
     outFile.close()
 
 if __name__ == "__main__":
     import sys
     pivotCSVFile( sys.argv[ 1 ] )
+
+
