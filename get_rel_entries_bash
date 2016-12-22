@@ -1,7 +1,10 @@
 #!/bin/bash
-## declare an array variable
+# This script iterates through the defined array, finds all JSON files, 
+# runs the data_lines script with the comapny name as an argument
+
+# declare an array variable for the list of companies that we are interested in 
 declare -a arr=("att" "disney" "apple" "netflix" "amazon" "walmart" "verizon" "microsoft")
-#declare -a arr=("disney")
+# declare -a arr=("disney")
 for n in "${arr[@]}";
     do for f in $( find ./ -name '*.json' );
         do python ./data_lines.py "$f" "$n";
