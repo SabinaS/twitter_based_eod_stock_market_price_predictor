@@ -15,13 +15,14 @@ def getEnglishEntries( filename ):
             else:
                 continue
     jData.close()
-    #print '~~~~~~~~~~~~~ en {}'.format( len(englishEntries))
+    print 'Found {} English entries'.format( len( englishEntries ) )
     return englishEntries
 
 def getRelevantEntries( companyName, listOfEntries ):
     ''' Method that reads in a company name and a pre-filtered list of 
         dicts and further filters the list to only include dicts
-        that have the company name in the text '''
+        that have the company name in the text 
+    '''
     relevantEntries = []
     for entry in listOfEntries:
         if u'text' in entry and u'entities' in entry:
@@ -31,10 +32,13 @@ def getRelevantEntries( companyName, listOfEntries ):
                 continue
         else:
             continue
-    #print '~~~~~~~~~~~~~~~~~~~~~ rel {}'.format( len( relevantEntries) )
+    print 'Found {} relevant entries'.format( len( relevantEntries) )
     return relevantEntries
 
 def getDateAndText( listOfEntries ):
+    ''' This method takes in a list of entries (each in the form of a dict) and
+        parses each of them to include only the 'created_at' and 'text' entries
+    '''
     parsedEntries = []
     for entry in listOfEntries:
         if u'user' in entry:
@@ -50,12 +54,14 @@ def getDateAndText( listOfEntries ):
             parsedEntries.append( tempDict )
         else:
             continue
-    #print '~~~~~~~~~~~~~~~~ par {}'.format( len( parsedEntries ) )
+    print 'Parsed {} entries'.format( len( parsedEntries ) )
     return parsedEntries
 
 
 def createCSV( companyName, listOfEntries ):
-    #print '~~~~~~~~~~~~~ cre {}'.format( len( listOfEntries ) )
+    ''' This method takes in a name and list of entires and creates a CSV file with 
+        that data under that name
+    '''
     if listOfEntries:
     	keys = listOfEntries[ 0 ].keys()
     	with open( companyName+'.csv', 'a+' ) as outputCSV:
@@ -65,7 +71,8 @@ def createCSV( companyName, listOfEntries ):
 
 def writeOutputJSON( companyName, listOfEntries) :
     ''' Method for taking in a list of entries and writing an output json
-        file containing those entries '''
+        file containing those entries 
+    '''
     strListOfEntries = [ str( entry ) for entry in listOfEntries ]
     with open( companyName+'.json', 'a+' ) as en:
         en.write( '\n'.join( strListOfEntries ) )
