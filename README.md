@@ -1,10 +1,10 @@
-# E6893 Big Data Analytics
-# Columbia Universitfdfdfsfsdfy
-# 12/22/2016
-# , Ben Zhu, Sabina Smajlaj
-# Professor Chin-Yung Lin
+E6893 Big Data Analytics
+Columbia University
+12/22/2016
+Nan Zhao, Ben Zhu, Sabina Smajlaj
+Professor Chin-Yung Lin
 
-EoD Price Predicotr
+#EoD Price Predicotr
 
 Data Source: 
 1. Twitter Dumps
@@ -22,7 +22,9 @@ Data Source:
       Quandl API: https://www.quandl.com/docs/api
       
 
-Tools Used: Python, Sk-learn, Hadoop, Pandas, Numpy, JSON, Regular Expression
+Tools Used: 
+
+Python, Sk-learn, Hadoop, Pandas, Numpy, JSON, Regular Expression
 
 1. Data Fetching
    get_rel_entries_bash and unzip_dir_bash are responsible for unzipping all data from different directories as well as sub directories. Each archive file is in form of Month-Day-Hour for subdirectories within the file. User shall run unzip_dir_bash and get_rel_entries_bash under Month folder to get 8 different csv for different company mentions.
