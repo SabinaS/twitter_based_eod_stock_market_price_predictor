@@ -4,7 +4,7 @@ Columbia University
 Nan Zhao, Ben Zhu, Sabina Smajlaj  
 Professor Chin-Yung Lin  
 
-#    EoD Price Predicotr
+#    EoD Price Predictor
 
 1. Data Source: 
       1. Twitter Dumps
