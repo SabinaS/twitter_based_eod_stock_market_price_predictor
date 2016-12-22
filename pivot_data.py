@@ -2,6 +2,9 @@
 import csv
 
 def pivotCSVFile( fileName ):
+    ''' This function takes in a filename, reads the file, adds the dates as keys to a dictionary so
+        that they are unique, and aggregates all texts that correspond to that date into one resulting value
+    '''
     # Temp dictionary to store values
     finalData = []
     pivotData = {}
